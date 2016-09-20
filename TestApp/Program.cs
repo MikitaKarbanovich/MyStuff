@@ -1,5 +1,7 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Configuration;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +18,7 @@ namespace TestApp
             int first,second;
             Console.WriteLine("Enter first number");
             keyboardInput=Console.ReadLine();
-            while (!Int32.TryParse(keyboardInput, out first))
-            {
+            while (!Int32.TryParse(keyboardInput, out first)) {
                 Console.WriteLine("Please, try again. The value should be integer.");
                 keyboardInput = Console.ReadLine();
             }
@@ -28,10 +29,18 @@ namespace TestApp
                 Console.WriteLine("Please, try again. The value should be integer.");
                 keyboardInput = Console.ReadLine();
             }
-            Console.WriteLine("Result of addition:" + numberAction.Addition(first, second));
-            Console.WriteLine("Result of subtraction:" + numberAction.Subtraction(first, second));
-            Console.WriteLine("Result of multiplication:" + numberAction.Multiplication(first, second));
-            Console.WriteLine("Result of division:" + numberAction.Division(first, second));
+            if (ConfigurationManager.AppSettings["useMethods"].Equals("1"))
+            {
+                Console.WriteLine("Result of addition:" + numberAction.Addition(first, second));
+                Console.WriteLine("Result of subtraction:" + numberAction.Subtraction(first, second));
+                Console.WriteLine("Result of multiplication:" + numberAction.Multiplication(first, second));
+                Console.WriteLine("Result of division:" + numberAction.Division(first, second));
+            }
+            else
+            {
+                Console.WriteLine("Result of addition:" + (first + second));
+
+            }
         }
     }
 }
