@@ -13,34 +13,12 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            NumberAction numberAction = new NumberAction();
-            string keyboardInput;
-            int first,second;
-            Console.WriteLine("Enter first number");
-            keyboardInput=Console.ReadLine();
-            while (!Int32.TryParse(keyboardInput, out first)) {
-                Console.WriteLine("Please, try again. The value should be integer.");
-                keyboardInput = Console.ReadLine();
-            }
-            Console.WriteLine("Enter second number");
-            keyboardInput = Console.ReadLine();
-            while (!Int32.TryParse(keyboardInput, out second))
-            {
-                Console.WriteLine("Please, try again. The value should be integer.");
-                keyboardInput = Console.ReadLine();
-            }
-            if (ConfigurationManager.AppSettings["useMethods"].Equals("1"))
-            {
-                Console.WriteLine("Result of addition:" + numberAction.Addition(first, second));
-                Console.WriteLine("Result of subtraction:" + numberAction.Subtraction(first, second));
-                Console.WriteLine("Result of multiplication:" + numberAction.Multiplication(first, second));
-                Console.WriteLine("Result of division:" + numberAction.Division(first, second));
-            }
-            else
-            {
-                Console.WriteLine("Result of addition:" + (first + second));
-
-            }
+            WitterAndReader witterAndReader = new WitterAndReader();
+            int first, second;
+            first = witterAndReader.NumberReader();
+            second = witterAndReader.NumberReader();
+            witterAndReader.ResultWritter(first, second);
         }
+       
     }
 }
